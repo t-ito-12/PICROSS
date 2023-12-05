@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CreatePICROSS.PICROSSPage"
+             xmlns:vm="clr-namespace:CreatePICROSS.ViewModels">
+    <StackLayout.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderColor" Value="Grey"/>
+            <Setter Property="CornerRadius" Value="0"/>
+        </Style>
+    </StackLayout.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <HorizontalStackLayout x:Name=" PanelButtonsColumn" 
+                               HorizontalOptions="CenterAndExpand" 
+                               Spacing="33"
+                               Grid.Row="0" 
+                               Grid.Column="1" 
+                               BindableLayout.ItemsSource="{Binding ColumnNumbers}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Text}" FontSize="Small"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+        <VerticalStackLayout x:Name="PanelButtonsRow" 
+                             VerticalOptions="CenterAndExpand" 
+                             Spacing="18"
+                             Grid.Row="1" Grid.Column="0" 
+                             BindableLayout.ItemsSource="{Binding RowNumbers}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Text}" FontSize="Small"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </VerticalStackLayout>
+        <Grid x:Name="PanelButtonsGrid" Grid.Row="1" Grid.Column="1" BindableLayout.ItemsSource="{Binding PanelButtons}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                        Grid.Row="{Binding Row}" 
+                        Grid.Column="{Binding Column}" 
+                        BackgroundColor="{Binding Color}" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PICROSSPageViewModel}}, Path=ButtonClick}" 
+                        CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+    </Grid>
+    
+
+</StackLayout>
